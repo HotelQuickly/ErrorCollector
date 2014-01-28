@@ -1,0 +1,23 @@
+{
+	"name": "HotelQuickly/ErrorCollector",
+	"homepage": "http://www.HotelQuickly.com",
+	"authors": [
+		{
+			"name": "Josef Nevoral",
+			"email": "josef.nevoral@hotelquickly.com",
+			"homepage": "http://www.josef-nevoral.cz"
+		}
+	],
+	"require": {
+		"php": ">= 5.4.0",
+		"aws/aws-sdk-php": "2.4.*"
+	},
+	"require-dev": {
+		"nette/tester": "@dev"
+	},
+	"autoload": {
+		"psr-0": {
+			"ErrorCollector": "src/"
+		}
+	}
+}
