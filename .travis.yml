@@ -7,3 +7,5 @@ script: VERBOSE=true ./run-tests.sh -s
 before_script:
     # install composer
     - composer install --no-interaction --prefer-source
+
+    - cd tests
