@@ -9,3 +9,4 @@ before_script:
     - composer install --no-interaction --prefer-source
 
     - cd tests
+    - mkdir -m 777 temp
