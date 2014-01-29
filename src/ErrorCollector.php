@@ -7,7 +7,8 @@ use Nette\DateTime;
 /**
  * Error collector to S3
  *
- * @author Jetsada Machom <jim@imjim.im>
+ * @author Jetsada Machom <jetsada.machom@hotelquickly.com>
+ * @author Josef Nevoral <josef.nevoral@hotelquickly.com>
  *
  */
 class ErrorCollector extends \Nette\Object {
