@@ -7,7 +7,7 @@ namespace HQ\Storage;
  *
  * @author Josef Nevoral <josef.nevoral@hotelquickly.com>
  */
-class S3Storage {
+class S3Storage implements IErrorStorage {
 
 	/** @var HQ\AWSProxy\S3Proxy */
 	private $s3Client;
