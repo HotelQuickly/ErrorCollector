@@ -1,5 +1,7 @@
 {
-	"name": "HotelQuickly/ErrorCollector",
+	"name": "hotel-quickly/error-collector",
+	"type": "library",
+	"keywords": "error handling",
 	"homepage": "http://www.HotelQuickly.com",
 	"authors": [
 		{
