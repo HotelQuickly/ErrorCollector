@@ -1,7 +1,7 @@
 {
 	"name": "hotel-quickly/error-collector",
 	"type": "library",
-	"keywords": "error handling",
+	"keywords": ["php", "error handling"],
 	"homepage": "http://www.HotelQuickly.com",
 	"authors": [
 		{
