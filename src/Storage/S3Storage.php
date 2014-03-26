@@ -2,6 +2,8 @@
 
 namespace HQ\Storage;
 
+use HQ\AWSProxy\S3Proxy;
+
 /**
  * Storage for exception files implemented on S3
  *
@@ -10,15 +12,15 @@ namespace HQ\Storage;
 class S3Storage implements IErrorStorage {
 
 	/** @var HQ\AWSProxy\S3Proxy */
-	private $s3Client;
+	private $s3proxy;
 
 	public function __construct(
 		$projectName,
 		$s3Bucket,
-		S3Client $s3Client
+		S3Proxy $s3Proxy
 	) {
-		$this->s3Client = $s3Client;
-		$this->s3Client->setBucket($s3Bucket);
+		$this->s3proxy = $s3proxy;
+		$this->s3proxy->setBucket($s3Bucket);
 
 		$this->projectName = $projectName;
 	}
@@ -27,6 +29,6 @@ class S3Storage implements IErrorStorage {
 	public function save($fileName, $localFilePath, $type)
 	{
 		$targetKey = $this->projectName . '/ ' . $type . '/' . $fileName;
-		return $this->s3Client->uploadFile($localFilePath, $targetKey);
+		return $this->s3proxy->uploadFile($localFilePath, $targetKey);
 	}
 }

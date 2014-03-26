@@ -26,17 +26,24 @@ class ErrorCollector extends \Nette\Object {
 	private $logDirectory;
 
 	public function __construct(
-		$logDirectory,
-		IErrorStorage $errorStorage
+		$logDirectory
 	) {
 		$this->logDirectory = $logDirectory;
+	}
+
+	public function setErrorStorage(IErrorStorage $errorStorage)
+	{
 		$this->errorStorage = $errorStorage;
 	}
 
 	public function uploadFiles()
 	{
 		if (!is_dir($this->logDirectory)) {
-			return null;
+			throw new \Nette\InvalidStateException('Uknown log directory: "' . $this->logDirectory . '"');
+		}
+
+		if (!$this->errorStorage) {
+			throw new \Nette\InvalidStateException('No error storage set.');
 		}
 
 		$files = $this->findFiles(array('*.html', '*.log'), $this->logDirectory);
