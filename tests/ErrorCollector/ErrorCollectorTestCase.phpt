@@ -17,10 +17,10 @@ require __DIR__ . '/../../src/Storage/IErrorStorage.php';
 
 class ErrorCollectorTestCase extends Tester\TestCase {
 
-	/** @var \HQ\ErrorCollector */
+	/** @var \HQ\ErrorCollector\ErrorCollector */
 	private $errorCollector;
 
-	/** @var HQ\Storage\IErrorStorage */
+	/** @var \HQ\Storage\IErrorStorage */
 	private $errorStorage;
 
 	/** @var string */
@@ -39,7 +39,7 @@ class ErrorCollectorTestCase extends Tester\TestCase {
 			}
 		));
 
-		$this->errorCollector = new \HQ\ErrorCollector($this->directory, $this->errorStorage);
+		$this->errorCollector = new \HQ\ErrorCollector\ErrorCollector($this->directory, $this->errorStorage);
 	}
 
 	public function tearDown()

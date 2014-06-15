@@ -1,6 +1,6 @@
 <?php
 
-namespace HQ;
+namespace HQ\ErrorCollector;
 
 use HQ\Storage\IErrorStorage;
 use Nette\Object;

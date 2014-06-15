@@ -1,6 +1,6 @@
 <?php
 
-namespace HQ;
+namespace HQ\ErrorCollector;
 
 use Nette;
 
@@ -44,7 +44,7 @@ class ErrorCollectorExtension extends Nette\DI\CompilerExtension {
 		}
 
 		$builder->addDefinition($this->prefix('errorCollector'))
-			->setClass('HQ\ErrorCollector', array(
+			->setClass('HQ\ErrorCollector\ErrorCollector', array(
 				'logDirectory' => $config['logDirectory'],
 				$this->prefix('storage')
 			));
