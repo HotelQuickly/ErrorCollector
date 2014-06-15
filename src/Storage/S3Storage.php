@@ -11,7 +11,7 @@ use HQ\AWSProxy\S3Proxy;
  */
 class S3Storage implements IErrorStorage {
 
-	/** @var HQ\AWSProxy\S3Proxy */
+	/** @var \HQ\AWSProxy\S3Proxy */
 	private $s3proxy;
 
 	public function __construct(
@@ -19,7 +19,7 @@ class S3Storage implements IErrorStorage {
 		$s3Bucket,
 		S3Proxy $s3Proxy
 	) {
-		$this->s3proxy = $s3proxy;
+		$this->s3proxy = $s3Proxy;
 		$this->s3proxy->setBucket($s3Bucket);
 
 		$this->projectName = $projectName;

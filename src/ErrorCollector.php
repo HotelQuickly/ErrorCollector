@@ -3,7 +3,8 @@
 namespace HQ;
 
 use HQ\Storage\IErrorStorage;
-use Nette\DateTime;
+use Nette\Object;
+
 /**
  * Error collector to S3
  *
@@ -11,7 +12,7 @@ use Nette\DateTime;
  * @author Josef Nevoral <josef.nevoral@hotelquickly.com>
  *
  */
-class ErrorCollector extends \Nette\Object {
+class ErrorCollector extends Object {
 
 	const EXCEPTION_FILE_TYPE = 'exception';
 	const LOG_FILE_TYPE = 'log';
@@ -20,15 +21,14 @@ class ErrorCollector extends \Nette\Object {
 	private $errorStorage;
 
 	/** @var string */
-	private $errorBucket;
-
-	/** @var string */
 	private $logDirectory;
 
 	public function __construct(
-		$logDirectory
+		$logDirectory,
+		IErrorStorage $errorStorage = null
 	) {
 		$this->logDirectory = $logDirectory;
+		$this->errorStorage = $errorStorage;
 	}
 
 	public function setErrorStorage(IErrorStorage $errorStorage)
@@ -48,6 +48,7 @@ class ErrorCollector extends \Nette\Object {
 
 		$files = $this->findFiles(array('*.html', '*.log'), $this->logDirectory);
 		$cnt = 0;
+		/** @var \SplFileInfo $file */
 		foreach ($files as $file) {
 
 			$filePath = realpath($this->logDirectory . '/' . $file->getFilename());
@@ -56,7 +57,7 @@ class ErrorCollector extends \Nette\Object {
 
 			$fileName = $file->getFilename();
 			if ($fileType === self::LOG_FILE_TYPE) {
-				$now = new DateTime();
+				$now = new \DateTime();
 				// add time extension to filename
 				$fileName = $file->getBasename('.log') . '-' . $now->format('Y-m-d-H-i-s') . '.log';
 			}

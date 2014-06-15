@@ -15,6 +15,7 @@ $ composer require hotel-quickly/error-collector:@dev
 Mandatory configuration in config.neon
 ```yml
 errorCollector:
+	projectName: vanilla
 	s3:
 		accessKeyId:
 		secretAccessKeyId:
@@ -28,6 +29,7 @@ errorCollector:
 		accessKeyId:
 		secretAccessKeyId:
 		region: 'ap-southeast-1'
+		bucket: hq-error-log
 	logDirectory: %appDir%/../log/
 	errorStorage: '\HQ\Storage\S3Storage'
 ```

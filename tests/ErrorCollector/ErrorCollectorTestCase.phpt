@@ -17,7 +17,7 @@ require __DIR__ . '/../../src/Storage/IErrorStorage.php';
 
 class ErrorCollectorTestCase extends Tester\TestCase {
 
-	/** @var HQ\ErrorCollector */
+	/** @var \HQ\ErrorCollector */
 	private $errorCollector;
 
 	/** @var HQ\Storage\IErrorStorage */
@@ -76,6 +76,8 @@ class ErrorCollectorTestCase extends Tester\TestCase {
 			'unknown-file.txt'
 		);
 		$this->prepareFiles($files);
+
+		$this->errorCollector->setErrorStorage($this->errorStorage);
 
 		Assert::same(3, $this->errorCollector->uploadFiles());
 
