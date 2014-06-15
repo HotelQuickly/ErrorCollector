@@ -46,7 +46,7 @@ class ErrorCollectorExtension extends Nette\DI\CompilerExtension {
 		$builder->addDefinition($this->prefix('errorCollector'))
 			->setClass('HQ\ErrorCollector\ErrorCollector', array(
 				'logDirectory' => $config['logDirectory'],
-				$this->prefix('storage')
+				'errorStorage' => $this->prefix('storage')
 			));
 	}
 }
