@@ -19,9 +19,9 @@
 		"nette/tester": "@dev",
 		"janmarek/mockista": "@dev"
 	},
-	"autoload": {
-		"psr-0": {
-			"ErrorCollector": "src/"
-		}
-	}
+    "autoload": {
+        "psr-4": {
+            "HQ\\ErrorCollector\\": "src/"
+        }
+    }
 }
