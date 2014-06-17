@@ -1,5 +1,6 @@
 ErrorCollector
 ==============
+[![Build Status](https://travis-ci.org/HotelQuickly/ErrorCollector.svg?branch=master)](https://travis-ci.org/HotelQuickly/ErrorCollector)
 
 Collector of latte exceptions for project build on [Nette Framework](http://nette.org).
 
