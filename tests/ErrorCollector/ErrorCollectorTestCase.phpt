@@ -31,7 +31,7 @@ class ErrorCollectorTestCase extends Tester\TestCase {
 		$this->mockista = new \Mockista\Registry();
 
 		$this->directory = TEMP_DIR;
-		$this->errorStorage = $this->mockista->create('HQ\Storage\IErrorStorage', array(
+		$this->errorStorage = $this->mockista->create('HQ\ErrorCollector\Storage\IErrorStorage', array(
 			'save' => function($fileName, $filePath, $type) {
 				@mkdir($this->directory . '/moved/');
 				file_put_contents($this->directory . '/moved/' . $fileName, 'test');
