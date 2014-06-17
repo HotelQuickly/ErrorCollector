@@ -5,14 +5,14 @@ Collector of latte exceptions for project build on [Nette Framework](http://nett
 
 Currently only Amazon AWS S3 is supported as shared storage for exception files.
 
-## Installation
+## Installation in your project
 Easiest way is to use [Composer](http://getcomposer.org/):
 
 ```sh
 $ composer require hotel-quickly/error-collector:@dev
 ```
 
-## Usage
+## Usage in your project
 
 Add mandatory configuration to config.neon. It's recommended to set access key to s3 in config.local.neon
 
@@ -38,9 +38,16 @@ errorCollector:
 	errorStorage: '\HQ\ErrorCollector\Storage\S3Storage'
 ```
 
+### Add extension to your bootstrap.php
+
+```php
+$configurator->onCompile[] = function ($configurator, $compiler) {
+    $compiler->addExtension('errorCollector', new \HQ\ErrorCollector\ErrorCollectorExtension);
+};
+```
+
 ### Add presenter with action for cron
 
-In project, where you are collector installing, add presenter with action for cron
 ```php
 <?php
 
