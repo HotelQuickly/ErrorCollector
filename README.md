@@ -22,7 +22,7 @@ errorCollector:
 	projectName: hotelquickly
 	s3:
 		accessKeyId:
-		secretAccessKeyId:
+		secretAccessKey:
 		region: 'ap-southeast-1'
 ```
 
@@ -31,11 +31,11 @@ Full configuration list
 errorCollector:
 	s3:
 		accessKeyId:
-		secretAccessKeyId:
+		secretAccessKey:
 		region: 'ap-southeast-1'
 		bucket: hq-error-log
 	logDirectory: %appDir%/../log/
-	errorStorage: '\HQ\Storage\S3Storage'
+	errorStorage: '\HQ\ErrorCollector\Storage\S3Storage'
 ```
 
 ### Add presenter with action for cron

@@ -16,8 +16,8 @@ if (!class_exists('Nette\DI\CompilerExtension')) {
 class ErrorCollectorExtension extends Nette\DI\CompilerExtension {
 
 	private $defaults = array(
-		'logDirectory' => '%appDir%/../log/errorCollector.log',
-		'errorStorage' => '\HQ\Storage\S3Storage',
+		'logDirectory' => '%appDir%/../log/',
+		'errorStorage' => '\HQ\ErrorCollector\Storage\S3Storage',
 		'bucket' => 'hq-error-log'
 	);
 
@@ -27,26 +27,22 @@ class ErrorCollectorExtension extends Nette\DI\CompilerExtension {
 		$config = $this->getConfig($this->defaults);
 
 		$storage = null;
-		if ($config['errorStorage'] === '\HQ\ErrorStorage\S3Storage') {
+		if ($config['errorStorage'] === '\HQ\ErrorCollector\Storage\S3Storage') {
 			$builder->addDefinition($this->prefix('S3Proxy'))
-				->setClass('HQ\Storage\S3Storage', array(
-					'accessKeyId' => $config['accessKeyId'],
-					'secretAccessKeyId' => $config['secretAccessKeyId'],
-					'region' => $config['region']
-				));
+				->setClass('HQ\AwsProxy\S3Proxy', array($config['s3']));
 
 			$builder->addDefinition($this->prefix('storage'))
-				->setClass('HQ\Storage\S3Storage', array(
+				->setClass('HQ\ErrorCollector\Storage\S3Storage', array(
 					'projectName' => $config['projectName'],
 					's3Bucket' => $config['bucket'],
-					$this->prefix('@S3Proxy')
+					's3Proxy' => '@errorCollector.S3Proxy'
 				));
 		}
 
 		$builder->addDefinition($this->prefix('errorCollector'))
 			->setClass('HQ\ErrorCollector\ErrorCollector', array(
 				'logDirectory' => $config['logDirectory'],
-				'errorStorage' => $this->prefix('storage')
+				'errorStorage' => '@errorCollector.storage'
 			));
 	}
 }

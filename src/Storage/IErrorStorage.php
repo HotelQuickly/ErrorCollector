@@ -1,6 +1,6 @@
 <?php
 
-namespace HQ\Storage;
+namespace HQ\ErrorCollector\Storage;
 
 /**
  * Interface for saving files to storage

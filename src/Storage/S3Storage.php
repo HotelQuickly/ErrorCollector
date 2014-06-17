@@ -1,6 +1,6 @@
 <?php
 
-namespace HQ\Storage;
+namespace HQ\ErrorCollector\Storage;
 
 use HQ\AWSProxy\S3Proxy;
 

@@ -2,7 +2,7 @@
 
 namespace HQ\ErrorCollector;
 
-use HQ\Storage\IErrorStorage;
+use HQ\ErrorCollector\Storage\IErrorStorage;
 use Nette\Object;
 
 /**
