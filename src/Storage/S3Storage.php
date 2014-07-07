@@ -28,7 +28,7 @@ class S3Storage implements IErrorStorage {
 
 	public function save($fileName, $localFilePath, $type)
 	{
-		$targetKey = $this->projectName . '/ ' . $type . '/' . $fileName;
+		$targetKey = $this->projectName . '/' . $type . '/' . $fileName;
 		return $this->s3proxy->uploadFile($localFilePath, $targetKey);
 	}
 }
