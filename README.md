@@ -69,7 +69,7 @@ class ErrorCollectorPresenter extends BasePresenter {
 And setup a cron
 
 ```
-*/1 * * * * root /usr/bin/wget --no-check-certificate -t 1 -q -O /dev/null http://vanilla.hotelquickly.com/cron/error-collector/upload-to-s3 >> /dev/null
+*/1 * * * * root /usr/bin/wget --no-check-certificate -t 1 -q -O /dev/null http://vanilla.hotelquickly.com/cron/error-collector/upload-errors >> /dev/null
 ```
 
 
