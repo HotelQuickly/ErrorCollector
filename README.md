@@ -25,6 +25,7 @@ errorCollector:
 		accessKeyId:
 		secretAccessKey:
 		region: 'ap-southeast-1'
+		bucket: 
 ```
 
 Full configuration list
