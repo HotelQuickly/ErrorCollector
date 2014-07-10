@@ -18,7 +18,9 @@ class ErrorCollectorExtension extends Nette\DI\CompilerExtension {
 	private $defaults = array(
 		'logDirectory' => '%appDir%/../log/',
 		'errorStorage' => '\HQ\ErrorCollector\Storage\S3Storage',
-		'bucket' => 'hq-error-log'
+		's3' => array(
+			'bucket' => 'hq-error-log'
+		)
 	);
 
 	public function loadConfiguration()
@@ -34,7 +36,7 @@ class ErrorCollectorExtension extends Nette\DI\CompilerExtension {
 			$builder->addDefinition($this->prefix('storage'))
 				->setClass('HQ\ErrorCollector\Storage\S3Storage', array(
 					'projectName' => $config['projectName'],
-					's3Bucket' => $config['bucket'],
+					's3Bucket' => $config['s3']['bucket'],
 					's3Proxy' => '@errorCollector.S3Proxy'
 				));
 		}
