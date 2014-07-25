@@ -40,7 +40,16 @@ errorCollector:
 	errorStorage: '\HQ\ErrorCollector\Storage\S3Storage'
 ```
 
-### Add extension to your bootstrap.php
+### Add DI container extension
+
+For Nette version >= 2.1 add to config.neon to extension list
+
+```yml
+extensions:
+	errorCollector: \HQ\ErrorCollector\ErrorCollectorExtension
+```
+
+For nette 2.0 add it to bootstrap.php
 
 ```php
 $configurator->onCompile[] = function ($configurator, $compiler) {
