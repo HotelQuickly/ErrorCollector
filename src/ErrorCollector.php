@@ -63,7 +63,7 @@ class ErrorCollector extends Object {
 			}
 
 			if ($this->errorStorage->save($fileName, $filePath, $fileType)) {
-				unlink($filePath);
+				@unlink($filePath);
 			}
 
 			$cnt++;
