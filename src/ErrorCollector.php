@@ -62,9 +62,18 @@ class ErrorCollector extends Object {
 				$fileName = $file->getBasename('.log') . '-' . $now->format('Y-m-d-H-i-s') . '.log';
 			}
 
-			if ($this->errorStorage->save($fileName, $filePath, $fileType)) {
-				@unlink($filePath);
-			}
+			try {
+				if ($this->errorStorage->save($fileName, $filePath, $fileType)) {
+					@unlink($filePath);
+				}
+			} catch (\Aws\Common\Exception\InvalidArgumentException $e) {
+				if ($e->getMessage() == 'You must specify a non-null value for the Body or SourceFile parameters.') {
+					// trying to upload empty file. Just ignore
+					@unlink($filePath);
+				}
+				throw $e;
+			};
+
 
 			$cnt++;
 		}
