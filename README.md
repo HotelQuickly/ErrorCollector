@@ -10,7 +10,7 @@ Currently only Amazon AWS S3 is supported as shared storage for exception files.
 Easiest way is to use [Composer](http://getcomposer.org/):
 
 ```sh
-$ composer require hotel-quickly/error-collector:v1.0.1
+$ composer require hotel-quickly/error-collector:v1.0.5
 ```
 
 ## Usage in your project
