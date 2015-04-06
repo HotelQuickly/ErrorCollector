@@ -23,11 +23,16 @@ class ErrorCollector extends Object {
 	/** @var string */
 	private $logDirectory;
 
+	/** @var  array */
+	private $collectFileTypes;
+
 	public function __construct(
 		$logDirectory,
+		array $collectFileTypes,
 		IErrorStorage $errorStorage = null
 	) {
 		$this->logDirectory = $logDirectory;
+		$this->collectFileTypes = $collectFileTypes;
 		$this->errorStorage = $errorStorage;
 	}
 
@@ -46,7 +51,7 @@ class ErrorCollector extends Object {
 			throw new \Nette\InvalidStateException('No error storage set.');
 		}
 
-		$files = $this->findFiles(array('*.html', '*.log'), $this->logDirectory);
+		$files = $this->findFiles($this->collectFileTypes, $this->logDirectory);
 		$cnt = 0;
 		/** @var \SplFileInfo $file */
 		foreach ($files as $file) {

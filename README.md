@@ -37,6 +37,9 @@ errorCollector:
 		region: 'ap-southeast-1'
 		bucket: hq-error-log
 	logDirectory: %appDir%/../log/
+	collectFileTypes:
+		- *.html
+		- *.log
 	errorStorage: '\HQ\ErrorCollector\Storage\S3Storage'
 ```
 

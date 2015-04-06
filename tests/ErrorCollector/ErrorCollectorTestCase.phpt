@@ -7,6 +7,7 @@
 
 namespace Tests;
 
+use HQ\ErrorCollector\Storage\IErrorStorage;
 use Nette,
 	Tester,
 	Tester\Assert;
@@ -26,11 +27,16 @@ class ErrorCollectorTestCase extends Tester\TestCase {
 	/** @var string */
 	private $directory;
 
+	/** @var  array */
+	private $collectFileTypes;
+
 	public function setUp()
 	{
 		$this->mockista = new \Mockista\Registry();
 
 		$this->directory = TEMP_DIR;
+		$this->collectFileTypes = array('*.html', '*.log');
+
 		$this->errorStorage = $this->mockista->create('HQ\ErrorCollector\Storage\IErrorStorage', array(
 			'save' => function($fileName, $filePath, $type) {
 				@mkdir($this->directory . '/moved/');
@@ -39,7 +45,7 @@ class ErrorCollectorTestCase extends Tester\TestCase {
 			}
 		));
 
-		$this->errorCollector = new \HQ\ErrorCollector\ErrorCollector($this->directory, $this->errorStorage);
+		$this->errorCollector = $this->createErrorCollector($this->directory, $this->collectFileTypes, $this->errorStorage);
 	}
 
 	public function tearDown()
@@ -88,6 +94,24 @@ class ErrorCollectorTestCase extends Tester\TestCase {
 		Assert::same(0, $this->errorCollector->uploadFiles());
 	}
 
+	public function testCollectCorrectFileTypes()
+	{
+		$files = array(
+			'temp-file.log',
+			'temp-log-file.log',
+			'temp-exception-file.html',
+			'unknown-file.txt'
+		);
+		$this->prepareFiles($files);
+
+		$errorCollector = $this->createErrorCollector($this->directory, array('*.html'), $this->errorStorage);
+
+		// it should upload only 1 file => html exception
+		Assert::same(1, $errorCollector->uploadFiles());
+
+		// nothing should be uploaded in second run
+		Assert::same(0, $errorCollector->uploadFiles());
+	}
 
 	public function testGetFileType()
 	{
@@ -117,6 +141,11 @@ class ErrorCollectorTestCase extends Tester\TestCase {
 		foreach ($iterator as $key => $value) $arr[] = strtr($key, '\\', '/');
 		sort($arr);
 		return $arr;
+	}
+
+	private function createErrorCollector($directory, array $collectFileTypes, IErrorStorage $errorStorage)
+	{
+		return new \HQ\ErrorCollector\ErrorCollector($directory, $collectFileTypes, $errorStorage);
 	}
 }
 
