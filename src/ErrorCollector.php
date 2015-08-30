@@ -67,6 +67,11 @@ class ErrorCollector extends Object {
 				$fileName = $file->getBasename('.log') . '-' . $now->format('Y-m-d-H-i-s') . '.log';
 			}
 
+			if (!is_file($filePath)) {
+				// some other process already collected it?
+				continue;
+			}
+
 			try {
 				if ($this->errorStorage->save($fileName, $filePath, $fileType)) {
 					@unlink($filePath);
@@ -77,7 +82,7 @@ class ErrorCollector extends Object {
 					@unlink($filePath);
 				}
 				throw $e;
-			};
+			}
 
 
 			$cnt++;
