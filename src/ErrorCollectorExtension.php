@@ -19,7 +19,6 @@ class ErrorCollectorExtension extends Nette\DI\CompilerExtension {
 		'logDirectory' => '%appDir%/../log/',
 		'collectFileTypes' => array(
 			'*.html',
-			'*.log'
 		),
 		'errorStorage' => '\HQ\ErrorCollector\Storage\S3Storage',
 		's3' => array(
